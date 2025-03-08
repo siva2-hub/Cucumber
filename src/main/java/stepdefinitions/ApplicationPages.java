@@ -10,9 +10,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.support.PageFactory;
+import pageobjects.PageObjects;
 
-public class ApplicationPages {
+public class ApplicationPages{
 	WebDriver driver;
+	PageObjects objects;
 	@Given("^I open browser \"([^\"]*)\"$")
 	public void i_open_browser(String arg1) throws Throwable {
 	    WebDriverManager.chromedriver().setup();
@@ -26,8 +29,9 @@ public class ApplicationPages {
 
 	@Then("^I see the Login Page$")
 	public void i_see_the_Login_Page() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    
+		objects=PageFactory.initElements(driver,PageObjects.class);
+		objects.signInButton.isDisplayed();
+		System.out.println("Browser is Opened, Login Page is Displayed");
 	}
 
 	@When("^I enter user name \"([^\"]*)\"$")
@@ -49,6 +53,7 @@ public class ApplicationPages {
 	}
 	@When("I Close the browser")
 	public void i_close_the_browser() {
-
+		driver.close();
+		System.out.println("Browser is closed");
 	}
 }
