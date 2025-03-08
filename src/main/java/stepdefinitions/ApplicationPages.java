@@ -47,4 +47,8 @@ public class ApplicationPages {
 	    // Write code here that turns the phrase above into concrete actions
 	    
 	}
+	@When("I Close the browser")
+	public void i_close_the_browser() {
+
+	}
 }
