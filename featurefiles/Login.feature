@@ -16,18 +16,17 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-@tag
-Feature: Login feature
-  I want to use this template for Login
+@Login_Logout
+Feature: Login and Logout feature
+  I want to use this template for Login and Logout
 
-  @tag1
+  @Login
   Scenario Outline: Login Into Application with Valid Data
-    Given I open browser "<url>"
     Then I see the Login Page
-    When I enter user name "<username>"
-    And I enter password "<password>"
-    And I click on Sign In button
+    When I enter valid data "<username>","<password>" and click sign-in
+    Then I should see the username
+    When I click on logout
+  Examples:
+    | username | password |
+    | djf      | sdjgn    |
 
-  Examples: 
-    | url                       | username | password |
-    | https://staging-portal.iidm.com    | djf      | sdjgn    |

@@ -2,6 +2,8 @@ package stepdefinitions;
 
 import java.time.Duration;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,44 +18,44 @@ import pageobjects.PageObjects;
 public class ApplicationPages{
 	WebDriver driver;
 	PageObjects objects;
-	@Given("^I open browser \"([^\"]*)\"$")
-	public void i_open_browser(String arg1) throws Throwable {
-	    WebDriverManager.chromedriver().setup();
-	    ChromeOptions options = new ChromeOptions();
-	    options.setExperimentalOption("excludeSwitches", new String[] {"enable-automation"});
-	    driver = new ChromeDriver(options);
-	    driver.manage().window().maximize();
-	    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-	    driver.get(arg1);
-	}
-
-	@Then("^I see the Login Page$")
-	public void i_see_the_Login_Page() throws Throwable {
+	@Before
+	public void setUp(){
+		WebDriverManager.chromedriver().setup();
+		ChromeOptions options = new ChromeOptions();
+		options.setExperimentalOption("excludeSwitches", new String[] {"enable-automation"});
+		driver = new ChromeDriver(options);
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		objects=PageFactory.initElements(driver,PageObjects.class);
-		objects.signInButton.isDisplayed();
+		driver.get("https://staging-portal.iidm.com");
 		System.out.println("Browser is Opened, Login Page is Displayed");
 	}
-
-	@When("^I enter user name \"([^\"]*)\"$")
-	public void i_enter_user_name(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    
+	@Then("^I see the Login Page$")
+	public void i_see_the_Login_Page() throws Throwable {
+		objects.signInButton.isDisplayed();
+		System.out.println("Sign in button is enabled");
+	}
+	@When("I enter valid data {string},{string} and click sign-in")
+	public void iEnterValidDataAndClickSignIn(String userName, String pWord) throws Exception {
+		objects.userNameField.sendKeys(userName);
+		objects.passwordFiled.sendKeys(pWord);
+		Thread.sleep(2000);
+		objects.signInButton.click();
+	}
+	@Then("I should see the username")
+	public void iShouldSeeTheUsername() {
+	}
+	@When("I click on logout")
+	public void iClickOnLogout() {
 	}
 
-	@When("^I enter password \"([^\"]*)\"$")
-	public void i_enter_password(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    
-	}
-
-	@When("^I click on Sign In button$")
-	public void i_click_on_Sign_In_button() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    
-	}
-	@When("I Close the browser")
-	public void i_close_the_browser() {
-		driver.close();
-		System.out.println("Browser is closed");
+//	@After
+	public void tearDown() {
+		if (driver!=null){
+			driver.quit();
+			System.out.println("Browser is closed");
+		}else {
+			System.out.println("WebDriver object is null");
+		}
 	}
 }
