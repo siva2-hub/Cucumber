@@ -16,17 +16,18 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-@Login_Logout
-Feature: Login and Logout feature
-  I want to use this template for Login and Logout
+Feature: Login functionality of the Pathology Lab Management app
 
-  @Login
-  Scenario Outline: Login Into Application with Valid Data
-    Then I see the Login Page
-    When I enter valid data "<username>","<password>" and click sign-in
-    Then I should see the username
-    When I click on logout
-  Examples:
-    | username | password |
-    | djf      | sdjgn    |
+  Background:
+    Given I am on the login page
+  Scenario: Verify that the login page loads correctly with username and password fields.
+    Then I should see the username and password fields
+
+  Scenario: Verify that the login page displays an error with incorrect credentials.
+    When I enter inValid credentials
+    Then I should see the error validations
+
+  Scenario: Verify that the login functionality works with valid credentials.
+    When I enter valid credentials
+    Then I should be redirected to the home page
 

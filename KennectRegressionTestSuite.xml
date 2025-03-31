@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="Big5" ?>
+<suite name="Kennect Regression Test Suite">
+    <test name="Login">
+        <classes>
+            <class name="testrunners.LoginTest" />
+        </classes>
+    </test>
+    <test name="Home">
+        <classes>
+            <class name="testrunners.HomeTest" />
+        </classes>
+    </test>
+    <test name="Add Patience">
+        <classes>
+            <class name="testrunners.AddPatientTest" />
+        </classes>
+    </test>
+    <test name="Cost Calculations">
+        <classes>
+            <class name="testrunners.CostCalnsForBloodTest" />
+        </classes>
+    </test>
+</suite>
