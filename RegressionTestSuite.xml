@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="Big5" ?>
+<suite name="Buzzworld Regression Suite">
+    <test name="Buzzworld Regression Test">
+        <classes>
+            <class name="com.tests.LoginTest" />
+        </classes>
+    </test>
+</suite>
