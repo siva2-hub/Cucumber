@@ -12,7 +12,7 @@ public class LoginTest extends OpenBrowser {
         loginPages= new LoginPages();
         boolean testStatus = loginPages.verifyLogin();
         if(testStatus){
-            loginPages.logout();
+            //loginPages.logout();
         }
         Assert.assertTrue(testStatus);
     }

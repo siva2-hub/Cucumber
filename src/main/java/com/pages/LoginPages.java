@@ -46,6 +46,7 @@ public class LoginPages extends OpenBrowser {
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         loginPageObs = PageFactory.initElements(driver,LoginPages.class);
         loginPageObs.userName.sendKeys(properties.getProperty("userName"));
+        Thread.sleep(1200);
         loginPageObs.password.sendKeys(properties.getProperty("pWord"));
         Thread.sleep(1300);
         loginPageObs.signInBtn.get(1).click();
