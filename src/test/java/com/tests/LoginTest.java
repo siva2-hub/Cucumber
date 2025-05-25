@@ -12,5 +12,6 @@ public class LoginTest extends OpenBrowser {
         loginPages= new LoginPages();
         boolean testStatus = loginPages.verifyLogin();
         Assert.assertTrue(testStatus);
+        System.out.println("Login test has done");
     }
 }
