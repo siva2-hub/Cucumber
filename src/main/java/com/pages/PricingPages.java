@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class PricingPages extends OpenBrowser {
-    private static final Logger log = LoggerFactory.getLogger(PricingPages.class);
     public LoginPages loginPages;
     public PricingPages pricingPages;
     public Actions actions;
@@ -37,7 +36,7 @@ public class PricingPages extends OpenBrowser {
 
     public void navigateToPricing() throws Exception {
         loginPages = new LoginPages();
-        //loginPages.verifyLogin();
+        loginPages.verifyLogin();
         loginPages.getEleByText(loginPages.driver, "Pricing").get(0).click();
         loginPages.getEleByText(loginPages.driver, "Pricing").get(1).click();
         pricingPages = PageFactory.initElements(loginPages.driver, PricingPages.class);

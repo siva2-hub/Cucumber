@@ -34,6 +34,10 @@ public class LoginPages extends OpenBrowser {
     @FindBy(xpath = "(//*[contains(@src,'vendor')])[1]")
     public WebElement companyLogo;
 
+    public WebElement getElementByText(WebDriver driver, String value) {
+        return driver.findElement(By.xpath("//*[text()='" + value + "']"));
+    }
+
     public LoginPages() throws Exception {
     }
 
@@ -44,11 +48,6 @@ public class LoginPages extends OpenBrowser {
 
     @BeforeClass
     public void loginFunction() throws Exception {
-//        openBrowser = new OpenBrowser();
-//        ArrayList<Object> data = openBrowser.openBrowser();
-//        driver = (WebDriver) data.get(0);
-//        properties = (Properties) data.get(1);
-//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         loginPageObs = PageFactory.initElements(driver, LoginPages.class);
         try {
             wait.until(ExpectedConditions.visibilityOf(loginPageObs.userName));

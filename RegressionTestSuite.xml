@@ -5,9 +5,15 @@
             <class name="com.tests.LoginTest"/>
         </classes>
     </test>
-    <test name="Pricing Tests">
+<!--    <test name="Pricing Tests">-->
+<!--        <classes>-->
+<!--            <class name="com.tests.PricingTests">-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test name="Sales DashBoard Tests">
         <classes>
-            <class name="com.tests.PricingTests">
+            <class name="com.tests.BranchMangeCheckInTheirOwnBranchTest">
             </class>
         </classes>
     </test>
