@@ -1,19 +1,20 @@
 package com.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.resources.OpenBrowser;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
-public class PricingPages {
+public class PricingPages extends OpenBrowser {
     private static final Logger log = LoggerFactory.getLogger(PricingPages.class);
     public LoginPages loginPages;
     public PricingPages pricingPages;
@@ -36,14 +37,14 @@ public class PricingPages {
 
     public void navigateToPricing() throws Exception {
         loginPages = new LoginPages();
-        loginPages.verifyLogin();
+        //loginPages.verifyLogin();
         loginPages.getEleByText(loginPages.driver, "Pricing").get(0).click();
         loginPages.getEleByText(loginPages.driver, "Pricing").get(1).click();
         pricingPages = PageFactory.initElements(loginPages.driver, PricingPages.class);
         loginPages.wait.until(ExpectedConditions.visibilityOf(pricingPages.editIcon));
     }
 
-    public void addProduct(String stockCode, String discountCode, double listPrice, String productClass) throws Exception {
+    public void addProduct(String stockCode, String discountCode, String listPrice, String productClass) throws Exception {
         this.navigateToPricing();
         actions = new Actions(loginPages.driver);
         loginPages.getEleByText(loginPages.driver, "Add").get(0).click();
@@ -51,19 +52,28 @@ public class PricingPages {
         //Fill the stock code
         pricingPages.stockCodeInput.sendKeys(stockCode);
         //Select the Discount code
-        loginPages.getEleByText(loginPages.driver, "Select").get(0).click();
-        actions.sendKeys(discountCode).perform();
-        this.selectDropddown(discountCode);
+        if (!discountCode.equals("")) {
+            loginPages.getEleByText(loginPages.driver, "Select").get(0).click();
+            actions.sendKeys(discountCode).perform();
+            Thread.sleep(1200);
+            this.selectDropddown(discountCode);
+        }
         //Fill the list price
-        pricingPages.listPriceInput.sendKeys(String.valueOf(listPrice));
+        pricingPages.listPriceInput.sendKeys(listPrice);
         //Select Product class
-        loginPages.getEleByText(loginPages.driver, "Select").get(0).click();
-        actions.sendKeys(productClass).perform();
-        this.selectDropddown(productClass);
+        if (!productClass.equals("")) {
+            int count = 0;
+            if (discountCode.equals("")) { count = 1; }
+            loginPages.getEleByText(loginPages.driver, "Select").get(count).click();
+            actions.sendKeys(productClass).perform();
+            Thread.sleep(1200);
+            this.selectDropddown(productClass);
+        }
         //Fill the Description Field
         pricingPages.descInput.sendKeys("Manually added through script");
         //click on Add Product button
         pricingPages.addProductButton.click();
+        Thread.sleep(1200);
     }
 
     public boolean addProduct_EmptyStockCode(Object[] vals) throws Exception {
@@ -72,14 +82,16 @@ public class PricingPages {
         String listPrice = vals[2].toString();
         String productClass = vals[3].toString();
         String validation = vals[4].toString();
-        this.addProduct(stockCode, discountCode, Double.parseDouble(listPrice), productClass);
+        this.addProduct(stockCode, discountCode, listPrice, productClass);
         boolean result = false;
         try {
             loginPages.getEleByText(loginPages.driver, validation).get(0).isDisplayed();
             Thread.sleep(1200);
             result = true;
         } catch (Exception e) {
+            throw new Exception(e);
         }
+        Thread.sleep(1200);
         pricingPages.pageClose.click();
         return result;
     }

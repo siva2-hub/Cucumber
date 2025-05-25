@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeClass;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -17,10 +18,10 @@ import java.util.Properties;
 
 public class LoginPages extends OpenBrowser {
     public OpenBrowser openBrowser;
-    public WebDriver driver;
+    public WebDriver driver = OpenBrowser.driver;
     public LoginPages loginPageObs;
-    public Properties properties;
-    public WebDriverWait wait;
+    public Properties properties = OpenBrowser.properties;
+    public WebDriverWait wait = OpenBrowser.wait;
     //Defining the Objects related to Login Page
     @FindBy(name = "username")
     public WebElement userName;
@@ -33,34 +34,48 @@ public class LoginPages extends OpenBrowser {
     @FindBy(xpath = "(//*[contains(@src,'vendor')])[1]")
     public WebElement companyLogo;
 
-    public List<WebElement> getEleByText(WebDriver driver,String eleText){
-        List<WebElement> elements=driver.findElements(By.xpath("//*[contains(text(),'"+eleText+"')]"));
+    public LoginPages() throws Exception {
+    }
+
+    public List<WebElement> getEleByText(WebDriver driver, String eleText) {
+        List<WebElement> elements = driver.findElements(By.xpath("//*[contains(text(),'" + eleText + "')]"));
         return elements;
     }
 
+    @BeforeClass
     public void loginFunction() throws Exception {
-        openBrowser = new OpenBrowser();
-        ArrayList<Object> data = openBrowser.openBrowser();
-        driver = (WebDriver) data.get(0);
-        properties = (Properties) data.get(1);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        loginPageObs = PageFactory.initElements(driver,LoginPages.class);
-        loginPageObs.userName.sendKeys(properties.getProperty("userName"));
-        Thread.sleep(1200);
-        loginPageObs.password.sendKeys(properties.getProperty("pWord"));
-        Thread.sleep(1300);
-        loginPageObs.signInBtn.get(1).click();
-        wait.until(ExpectedConditions.visibilityOf(loginPageObs.companyLogo));
+//        openBrowser = new OpenBrowser();
+//        ArrayList<Object> data = openBrowser.openBrowser();
+//        driver = (WebDriver) data.get(0);
+//        properties = (Properties) data.get(1);
+//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        loginPageObs = PageFactory.initElements(driver, LoginPages.class);
+        try {
+            wait.until(ExpectedConditions.visibilityOf(loginPageObs.userName));
+            loginPageObs.userName.sendKeys(properties.getProperty("userName"));
+            Thread.sleep(1200);
+            loginPageObs.password.sendKeys(properties.getProperty("pWord"));
+            Thread.sleep(1300);
+            loginPageObs.signInBtn.get(1).click();
+            wait.until(ExpectedConditions.visibilityOf(loginPageObs.companyLogo));
+        } catch (Exception e) {
+        }
     }
-    public void logout(){
+
+    public boolean logout() {
         loginPageObs.userProfile.click();
         this.getEleByText(driver, "Logout").get(0).click();
-        driver.close();
+        if (loginPageObs.userName.isDisplayed()) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
     public boolean verifyLogin() throws Exception {
         this.loginFunction();
         boolean result = false;
-        try{
+        try {
             wait.until(ExpectedConditions.visibilityOf(loginPageObs.userProfile));
             loginPageObs.userProfile.isDisplayed();
             result = true;

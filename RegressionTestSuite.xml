@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="Big5" ?>
 <suite name="Buzzworld Regression Suite">
-    <test name="Login Test">
+    <test name="Login Tests">
         <classes>
             <class name="com.tests.LoginTest"/>
         </classes>
     </test>
-    <test name="Add Product With Empty Stock code Test">
-        <parameter name="stockCode" value=""/>
-        <parameter name="discountCode" value="BACO44"/>
-        <parameter name="listPrice" value="342.21"/>
-        <parameter name="productClass" value="BA01"/>
-        <parameter name="validation" value="Please enter Stock Code"/>
+    <test name="Pricing Tests">
         <classes>
-            <class name="com.tests.PricingTests"/>
+            <class name="com.tests.PricingTests">
+            </class>
         </classes>
     </test>
 </suite>
