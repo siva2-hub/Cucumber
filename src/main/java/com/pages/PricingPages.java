@@ -36,7 +36,7 @@ public class PricingPages extends OpenBrowser {
 
     public void navigateToPricing() throws Exception {
         loginPages = new LoginPages();
-        loginPages.verifyLogin();
+//        loginPages.verifyLogin();
         loginPages.getEleByText(loginPages.driver, "Pricing").get(0).click();
         loginPages.getEleByText(loginPages.driver, "Pricing").get(1).click();
         pricingPages = PageFactory.initElements(loginPages.driver, PricingPages.class);

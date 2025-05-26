@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SalesDashBoardPages extends OpenBrowser {
@@ -18,6 +19,8 @@ public class SalesDashBoardPages extends OpenBrowser {
     public WebElement branchFilter;
     @FindBys(value = @FindBy(xpath = "//*[@class='tree-select-dropdown']/div/div"))
     public List<WebElement> branchesList;
+    @FindBys(value = @FindBy(xpath = "//*[@class='tree-select-dropdown']/div/div/div[2]/div"))
+    public List<WebElement> branchesUsersList;
 
     public void navigateToSalesDashBoard() throws Exception {
         sales = PageFactory.initElements(driver, SalesDashBoardPages.class);
@@ -27,22 +30,39 @@ public class SalesDashBoardPages extends OpenBrowser {
         Thread.sleep(4000);
     }
 
-    public void checkSalesManagerInOwnBranch(String branchName, String salesManager) throws Exception {
+    public boolean checkSalesManagerInOwnBranch(String branchName, String salesManager, boolean checkOnlyBranch) throws Exception {
         this.navigateToSalesDashBoard();
+        boolean checkUser = false;
         sales.branchFilter.isDisplayed();
         sales.branchFilter.click();
         Thread.sleep(4300);
         int branchesCount = sales.branchesList.size();
-        System.out.println("branches count is " + branchesCount + "\nList of first are ");
-        for (int i = 0; i < branchesCount; i++) {
-            WebElement branch = sales.branchesList.get(i);
-            System.out.println("List of branches are " + branch.getText());
+        ArrayList<String> branchList = new ArrayList<>();
+        for (WebElement branch : sales.branchesList) {
+            branchList.add(branch.getText());
+        }
+        System.out.println("Branches count: " + branchesCount + "\nBranches List: " + branchList);
+        for (WebElement branch : sales.branchesList) {
             if (branch.getText().equals(branchName)) {
-                branch.click();
+                if(checkOnlyBranch){
+                    branch.click();
+                    branch.findElement(By.xpath("//div/input")).click();Thread.sleep(4300);
+                    checkUser = true; break;
+                }else {
+                    branch.click();
+                    for (WebElement salesEle : sales.branchesUsersList) {
+                        if (salesEle.getText().equals(salesManager)) {
+                            salesEle.click(); Thread.sleep(4300); checkUser = true; break;
+                        }
+                    }
+                }
                 break;
             }
+        }if (checkUser){
+            System.out.println(salesManager+" is found in branches dropdown");
+        }else {
+            System.out.println(salesManager+" isn't found in branches dropdown");
         }
-
-        System.exit(0);
+        return checkUser;
     }
 }
