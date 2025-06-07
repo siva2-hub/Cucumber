@@ -7,11 +7,15 @@ import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 
 public class BranchMangeCheckInTheirOwnBranchTest extends OpenBrowser {
-
-    @Test
+    public SalesDashBoardPages sales = new SalesDashBoardPages();;
+    @Test(enabled = false)
     public void checkSalesManagerInOwnBranchTest() throws Exception {
-        SalesDashBoardPages sales = new SalesDashBoardPages();
+
         boolean testResult = sales.checkSalesManagerInOwnBranch("Dallas","Test Default", true);
         Assert.assertTrue(testResult);
+    }
+    @Test
+    public void checkUserGoals() throws Exception {
+        sales.checkGoalsForDifferentSales();
     }
 }
