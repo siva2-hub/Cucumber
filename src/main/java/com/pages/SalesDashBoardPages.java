@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,5 +65,13 @@ public class SalesDashBoardPages extends OpenBrowser {
             System.out.println(salesManager+" isn't found in branches dropdown");
         }
         return checkUser;
+    }
+    public void checkGoalsForDifferentSales() throws Exception {
+        this.navigateToSalesDashBoard();
+        loginPages.getEleByText(loginPages.driver,"Admin").get(0).click();
+        loginPages.wait.until(ExpectedConditions.visibilityOf(loginPages.getEleByText(driver,"Users").get(0)));
+        loginPages.getEleByText(driver,"Users").get(0).click();
+        loginPages.wait.until(ExpectedConditions.visibilityOf(loginPages.getEleByText(driver,"User Profile").get(0)));
+        Thread.sleep(2300);
     }
 }

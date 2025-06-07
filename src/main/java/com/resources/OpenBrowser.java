@@ -20,11 +20,11 @@ public class OpenBrowser {
     public static Properties properties;
     public static FileInputStream fi;
     public static WebDriverWait wait;
-
     @BeforeSuite
     public static ArrayList<Object> openBrowser() throws Exception {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         driver = new ChromeDriver(options);
         driver.manage().deleteAllCookies();

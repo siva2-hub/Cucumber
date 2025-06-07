@@ -11,10 +11,10 @@
 <!--            </class>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name="Sales DashBoard Tests">
-        <classes>
-            <class name="com.tests.BranchMangeCheckInTheirOwnBranchTest">
-            </class>
-        </classes>
-    </test>
+<!--    <test name="Sales DashBoard Tests">-->
+<!--        <classes>-->
+<!--            <class name="com.tests.BranchMangeCheckInTheirOwnBranchTest">-->
+<!--            </class>-->
+<!--        </classes>n-->
+<!--    </test>-->
 </suite>

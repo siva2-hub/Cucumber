@@ -1,6 +1,7 @@
 package com.pages;
 
 import com.resources.OpenBrowser;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
