@@ -1,0 +1,218 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "login;successful-:login",
+        "keyword": "Scenario Outline",
+        "line": 34,
+        "name": "Successful :Login",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 23,
+            "name": "I am on the login page with the URL \"http://staging-portal.iidm.com/dashboard\"",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12405127799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "I enter my username as \"multicam@testuser.com\"",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1092739499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "I enter my password as \"Enter@4321\"",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1044099399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 26,
+            "name": "I click the login button",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:30"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3397602500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "I should see a welcome message \"MULTICAM INC\"",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:33"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9068210799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 28,
+            "name": "I should be redirected to the dashboard",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12198499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 29,
+            "name": "I log out",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3087800700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 30,
+            "name": "I should be redirected to the login page",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:47"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 467500
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "login;successful-:credit-card-payment",
+        "keyword": "Scenario Outline",
+        "line": 46,
+        "name": "Successful :Credit Card Payment",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 37,
+            "name": "I click on the Shop now button",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:54"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 30006223399,
+              "error_message": "page.waitForEvent: Timeout 30000ms exceeded while waiting for event \"popup\"\n=========================== logs ===========================\nwaiting for event \"popup\"\n============================================================\n    at goToStoreFromPortal (D:\\Playwright_Java\\PlaywrightCucumber\\features\\step-definitions\\PaymentsPage.js:6:32)\n    at World.<anonymous> (D:\\Playwright_Java\\PlaywrightCucumber\\features\\step-definitions\\Login.js:55:20)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 38,
+            "name": "I should be redirected to the store home page",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:57"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 39,
+            "name": "I search for a product with the name \"\"",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:61"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 40,
+            "name": "I go to the product page",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:64"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 41,
+            "name": "I add the product to the cart",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:67"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 42,
+            "name": "I proceed to checkout",
+            "match": {
+              "location": "features\\step-definitions\\Login.js:70"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "login",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Login",
+    "tags": [],
+    "uri": "features\\login.feature"
+  }
+]
