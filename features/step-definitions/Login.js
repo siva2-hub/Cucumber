@@ -1,8 +1,9 @@
 const { Given, When, Then, BeforeAll, AfterAll, setDefaultTimeout } = require("@cucumber/cucumber");
-const playwright = require('@playwright/test');
+const playwright = require('playwright')
 const { expect } = require('@playwright/test');
 const Objects = require('./Objects.js');
-const { goToStoreFromPortal } = require("./PaymentsPage.js");
+const paymentsPage = require('./PaymentsPage.js')
+// const { goToStoreFromPortal, partsSearch } = require("./PaymentsPage.js");
 let browser, context, page, newTab, elements, newTabElements;
 setDefaultTimeout(600000000); // 60 seconds
 BeforeAll(async function () {
@@ -16,7 +17,7 @@ BeforeAll(async function () {
     elements = new Objects(page);
 });
 AfterAll(async function () {
-    await page.close();
+    await context.close();
 });
 Given('I am on the login page with the URL {string}', async function (url) {
     await page.goto(url);
@@ -52,7 +53,7 @@ Then('I should see an error message {string}, {string}', async function (error_m
     await expect(elements.get_by_text(error_message2)).toBeVisible({ timeout: 30000 });
 });
 When('I click on the Shop now button', async function () {
-    newTab = await goToStoreFromPortal(elements, page);
+    newTab = await paymentsPage.goToStoreFromPortal(elements, page);
 });
 Then('I should be redirected to the store home page', async function () {
     newTabElements = new Objects(newTab);
@@ -61,8 +62,8 @@ Then('I should be redirected to the store home page', async function () {
 When('I search for a product with the name {string}', async function (string) {
     await newTabElements.storeSearch.fill(string);
 });
-When('I go to the product page', async function () {
-
+When('I go to the product page {string}', async function (productName) {
+    await paymentsPage.partsSearch(productName);
 });
 When('I add the product to the cart', async function () {
 
