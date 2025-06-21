@@ -1,18 +1,21 @@
 const { expect } = require("@playwright/test");
+// const elements = require('./Objects.js');
+const Elements = require("./Objects.js");
+const objects = new Elements();
 
 let elements, newTab;
-async function goToStoreFromPortal(getElements, page) {
-    elements = getElements;
+async function goToStoreFromPortal(page) {
     const pagePromise = page.waitForEvent('popup');
-    await elements.get_by_text('Shop Now').click();
+    // await elements.get_by_text('Shop Now').click();
+    await objects.get_by_text(page, 'Shop Now').click();
     newTab = await pagePromise;
     return newTab;
 }
-async function partsSearch(productName) {
-    let searchText = await elements.searchText;
+async function partsSearch(page, productName) {
+    let searchText = await objects.searchText(page);
     let searchResult = false;
     await expect(searchText.first()).toBeVisible({ timeout: 30000 }); await expect(searchText.first()).toBeHidden({ timeout: 30000 });
-    let search_prod_name = await elements.searchedProdName;
+    let search_prod_name = await objects.searchedProdName(page);
     console.log('prods count at search is: ' + await search_prod_name.count())
     for (let index = 0; index < await search_prod_name.count(); index++) {
         const dis_prod_name = await search_prod_name.nth(index).textContent();
@@ -26,5 +29,10 @@ async function partsSearch(productName) {
         throw new Error("getting error while search or item not found");
     }
 }
+async function addPartToCart(newTab) {
+    await objects.addToCartButton(newTab).click();
+    await expect(objects.viewCartButton(newTab)).toBeVisible({ timeout: 30000 }); // Adjust this line as needed to check for a specific element after adding to cart
+    await objects.viewCartButton(newTab).click();
+}
 
-module.exports = { goToStoreFromPortal, partsSearch };
+module.exports = { goToStoreFromPortal, partsSearch, addPartToCart };
