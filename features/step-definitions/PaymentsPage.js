@@ -34,5 +34,15 @@ async function addPartToCart(newTab) {
     await expect(objects.viewCartButton(newTab)).toBeVisible({ timeout: 30000 }); // Adjust this line as needed to check for a specific element after adding to cart
     await objects.viewCartButton(newTab).click();
 }
-
-module.exports = { goToStoreFromPortal, partsSearch, addPartToCart };
+async function validateCustDetails(phone) {
+    await objects.enterPhoneNumber(newTab).fill(phone);
+    await objects.nextButton(newTab).click();
+}
+async function validateShippingDetails(shipMethodName) {
+    let shipToName = objects.shipToNameField(newTab);
+    if (await shipToName.getAttribute('value') == '') { await shipToName.fill('Test Ship to Name'); }
+    await objects.shippingMethod(newTab).click();
+    await objects.selectShippingMethod(newTab, shipMethodName).click();
+    await objects.nextButton(newTab).click();
+}
+module.exports = { goToStoreFromPortal, partsSearch, addPartToCart, validateCustDetails, validateShippingDetails };

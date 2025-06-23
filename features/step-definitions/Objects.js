@@ -33,5 +33,10 @@ class Elements {
     viewCartButton(page) { return page.getByRole('link', { name: 'View Cart ' }); }
     checkoutButton(page) { return page.getByRole('link', { name: 'Checkout' }); }
     enterPhoneNumber(page) { return page.getByRole('textbox', { name: 'Enter Phone Number' }); }
+    nextButton(page) { return page.getByRole('button', { name: 'Next' }); }
+    shipToNameField(page) { return page.getByRole('textbox', { name: 'Enter Ship To Name' }); }
+    shippingMethod(page) { return page.getByText('Select Shipping Method'); }
+    selectShippingMethod(page, shippingMethod) { return page.getByText(shippingMethod, { exact: true }); }
+    notes(page) { return page.locator("//*[@name='notes']"); }
 }
 module.exports = Elements;

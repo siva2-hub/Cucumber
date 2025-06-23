@@ -74,3 +74,12 @@ When('I proceed to checkout', async function () {
     await elements.checkoutButton(newTab).click();
     await expect(elements.enterPhoneNumber(newTab)).toBeVisible({ timeout: 30000 });
 });
+When('I validate the customer details {string}', async function (phone) {
+    await paymentsPage.validateCustDetails(phone);
+});
+When('I validate the builling details', async function () {
+    await elements.nextButton(newTab).click();
+});
+When('I validate the shipping details {string}', async function (string) {
+    await paymentsPage.validateShippingDetails(string);
+});
