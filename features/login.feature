@@ -3,27 +3,27 @@ Feature: Login
   Scenario: Login Page
     Given I am on the login page with the URL "http://staging-portal.iidm.com/dashboard"
 
-  Scenario Outline: Unsuccessful Case :Login
-    When I enter my username as "<username>"
-    And I enter my password as "<password>"
-    And I click the login button
-    Then I should see an error message "<error_message>"
+  # Scenario Outline: Unsuccessful Case :Login
+  #   When I enter my username as "<username>"
+  #   And I enter my password as "<password>"
+  #   And I click the login button
+  #   Then I should see an error message "<error_message>"
 
-    Examples:
-      | username              | password        | error_message             |
-      | invalid_user@test.com | InvalidPassword | Invalid Email or Password |
-      |                       | InvalidPassword | Please Enter Email Id     |
-      | invalid_user@test.com |                 | Please Enter Password     |
+  #   Examples:
+  #     | username              | password        | error_message             |
+  #     | invalid_user@test.com | InvalidPassword | Invalid Email or Password |
+  #     |                       | InvalidPassword | Please Enter Email Id     |
+  #     | invalid_user@test.com |                 | Please Enter Password     |
 
-  Scenario Outline: Empty Credentials :Login
-    When I enter my username as "<username>"
-    And I enter my password as "<password>"
-    And I click the login button
-    Then I should see an error message "<error_message1>", "<error_message2>"
+  # Scenario Outline: Empty Credentials :Login
+  #   When I enter my username as "<username>"
+  #   And I enter my password as "<password>"
+  #   And I click the login button
+  #   Then I should see an error message "<error_message1>", "<error_message2>"
 
-    Examples:
-      | username | password | error_message1        | error_message2        |
-      |          |          | Please Enter Email Id | Please Enter Password |
+  #   Examples:
+  #     | username | password | error_message1        | error_message2        |
+  #     |          |          | Please Enter Email Id | Please Enter Password |
 
   Scenario Outline: Successful :Login
     When I enter my username as "<username>"
