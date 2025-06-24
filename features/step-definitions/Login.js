@@ -80,6 +80,9 @@ When('I validate the customer details {string}', async function (phone) {
 When('I validate the builling details', async function () {
     await elements.nextButton(newTab).click();
 });
-When('I validate the shipping details {string}', async function (string) {
-    await paymentsPage.validateShippingDetails(string);
+When('I validate the shipping details {string}, {string}', async function (string, notesText) {
+    await paymentsPage.validateShippingDetails(string, notesText);
+});
+When('I verify the prices {string}', async function (paymentMethod) {
+    await paymentsPage.verifyThePriceAtCheckout(newTab, paymentMethod);
 });

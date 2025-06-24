@@ -38,5 +38,16 @@ class Elements {
     shippingMethod(page) { return page.getByText('Select Shipping Method'); }
     selectShippingMethod(page, shippingMethod) { return page.getByText(shippingMethod, { exact: true }); }
     notes(page) { return page.locator("//*[@name='notes']"); }
+    includeTaxCheckBox(page) { return page.locator('label').filter({ hasText: 'Include Tax' }); }
+    subTotal(page) { return page.locator("(//*[contains(@class,'Total_container')])[1]/div/div[2]"); }
+    tax(page) { return page.locator("(//*[contains(@class,'Total_container')])[1]/div/div[2]"); }
+    paymentRadioButtonsLabels(page) { return page.locator("(//*[contains(@role,'radiogroup')])/label/span") }
+    paymentRadioButtons(page) { return page.locator("(//*[contains(@role,'radiogroup')])/label/input") }
+    proceedButton(page) { return page.getByRole('button', { name: 'Proceed' }) }
+    cardNameField(page) { return page.getByRole('textbox', { name: 'Enter Name on the Card' }) }
+    cardNumberField(page) { return page.getByRole('textbox', { name: 'Enter Card Number' }) }
+    expiryDateField(page) { return page.getByRole('textbox', { name: 'MM / YY' }) }
+    cvcField(page) { return page.getByRole('textbox', { name: 'Enter CVC' }) }
+    proceedToPaymentButton(page) { return page.getByRole('button', { name: 'Proceed To Payment' }) }
 }
 module.exports = Elements;

@@ -12,8 +12,9 @@ Feature: Payments
     And I proceed to checkout
     And I validate the customer details "<phonenumber>"
     And I validate the builling details
-    And I validate the shipping details "<shippingMethod>"
+    And I validate the shipping details "<shippingMethod>", "<notesText>"
+    And I verify the prices "<paymentMethod>"
 
     Examples:
-      | product_name | phonenumber | shippingMethod |
-      |      231-642 |  1234567890 | FEDX - Ground  |
+      | product_name | phonenumber | shippingMethod | notesText                                              | paymentMethod |
+      |      231-642 |  1234567890 | FEDX - Ground  | notes are added for credit card payment with Logged In | Credit Card   |
